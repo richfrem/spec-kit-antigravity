@@ -60,7 +60,7 @@ Running `specify init --here --force` will update:
 These files are **never touched** by the upgrade—the template packages don't even contain them:
 
 - ✅ **Your specifications** (`specs/001-my-feature/spec.md`, etc.) - **CONFIRMED SAFE**
-- ✅ **Your implementation plans** (`specs/001-my-feature/plan.md`, `tasks.md`, etc.) - **CONFIRMED SAFE**
+- ✅ **Your implementation plans** (`specs/001-my-feature/speckit-plan.md`, `tasks.md`, etc.) - **CONFIRMED SAFE**
 - ✅ **Your source code** - **CONFIRMED SAFE**
 - ✅ **Your git history** - **CONFIRMED SAFE**
 
@@ -102,26 +102,26 @@ With `--force`, it skips the confirmation and proceeds immediately.
 
 ### 1. Constitution file will be overwritten
 
-**Known issue:** `specify init --here --force` currently overwrites `.agent/rules/constitution.md` with the default template, erasing any customizations you made.
+**Known issue:** `specify init --here --force` currently overwrites `.agent/rules/speckit-constitution.md` with the default template, erasing any customizations you made.
 
 **Workaround:**
 
 ```bash
 # 1. Back up your constitution before upgrading
-cp .agent/rules/constitution.md .agent/rules/constitution-backup.md
+cp .agent/rules/speckit-constitution.md .agent/rules/speckit-constitution-backup.md
 
 # 2. Run the upgrade
 specify init --here --force --ai copilot
 
 # 3. Restore your customized constitution
-mv .agent/rules/constitution-backup.md .agent/rules/constitution.md
+mv .agent/rules/speckit-constitution-backup.md .agent/rules/speckit-constitution.md
 ```
 
 Or use git to restore it:
 
 ```bash
 # After upgrade, restore from git history
-git restore .agent/rules/constitution.md
+git restore .agent/rules/speckit-constitution.md
 ```
 
 ### 2. Custom template modifications
@@ -171,14 +171,14 @@ uv tool install specify-cli --force --from git+https://github.com/github/spec-ki
 specify init --here --force --ai copilot
 
 # Restore your constitution if customized
-git restore .agent/rules/constitution.md
+git restore .agent/rules/speckit-constitution.md
 ```
 
 ### Scenario 2: "I customized templates and constitution"
 
 ```bash
 # 1. Back up customizations
-cp .agent/rules/constitution.md /tmp/constitution-backup.md
+cp .agent/rules/speckit-constitution.md /tmp/speckit-constitution-backup.md
 cp -r .agent/workflows/templates /tmp/templates-backup
 
 # 2. Upgrade CLI
@@ -188,7 +188,7 @@ uv tool install specify-cli --force --from git+https://github.com/github/spec-ki
 specify init --here --force --ai copilot
 
 # 4. Restore customizations
-mv /tmp/constitution-backup.md .agent/rules/constitution.md
+mv /tmp/speckit-constitution-backup.md .agent/rules/speckit-constitution.md
 # Manually merge template changes if needed
 ```
 
@@ -215,13 +215,13 @@ If you initialized your project with `--no-git`, you can still upgrade:
 
 ```bash
 # Manually back up files you customized
-cp .agent/rules/constitution.md /tmp/constitution-backup.md
+cp .agent/rules/speckit-constitution.md /tmp/speckit-constitution-backup.md
 
 # Run upgrade
 specify init --here --force --ai copilot --no-git
 
 # Restore customizations
-mv /tmp/constitution-backup.md .agent/rules/constitution.md
+mv /tmp/speckit-constitution-backup.md .agent/rules/speckit-constitution.md
 ```
 
 The `--no-git` flag skips git initialization but doesn't affect file updates.
@@ -303,10 +303,10 @@ This tells Spec Kit which feature directory to use when creating specs, plans, a
 
 ```bash
 # If you committed before upgrading
-git restore .agent/rules/constitution.md
+git restore .agent/rules/speckit-constitution.md
 
 # If you backed up manually
-cp /tmp/constitution-backup.md .agent/rules/constitution.md
+cp /tmp/speckit-constitution-backup.md .agent/rules/speckit-constitution.md
 ```
 
 **Prevention:** Always commit or back up `constitution.md` before upgrading.
@@ -361,7 +361,7 @@ Only Spec Kit infrastructure files:
 - ✅ **Expected** when adding Spec Kit to an existing codebase
 - ⚠️ **Unexpected** if you thought you were creating a new project in an empty directory
 
-**Prevention tip:** Before upgrading, commit or back up your `.agent/rules/constitution.md` if you customized it.
+**Prevention tip:** Before upgrading, commit or back up your `.agent/rules/speckit-constitution.md` if you customized it.
 
 ### "CLI upgrade doesn't seem to work"
 

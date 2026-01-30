@@ -126,8 +126,6 @@ def sanitize_content():
                 content = re.sub(f"/(?!speckit-){cmd}", f"/speckit-{cmd}", content)
                 content = re.sub(f"/speckit\.{cmd}", f"/speckit-{cmd}", content)
                 
-                # Enforce speckit-cmd.md references (matches word boundary start to avoid partial replace)
-                content = re.sub(rf"(?<!speckit-)\b{cmd}\.md", f"speckit-{cmd}.md", content)
             
             if content != original_content:
                 with open(filepath, 'w', encoding='utf-8') as f:
@@ -174,7 +172,8 @@ def main():
     
     ensure_dirs()
     copy_sources()
-    rename_workflows()
+    # Note: Source workflow files are already prefixed with speckit-
+    # No renaming needed, just sanitize content for any legacy refs
     sanitize_content()
     
     print(f"\n✅ Build Complete. Distribution is ready in '{DIST_DIR}/'")
