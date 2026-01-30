@@ -357,11 +357,11 @@ specify init <project_name> --ai antigravity
 
 Go to the project folder and run your AI agent.
 
-![Spec Kit CLI Menu with Antigravity Support](./media/speckit-specify_cli_menu_antigravity.png)
+![Spec Kit CLI Menu with Antigravity Support](./media/specify_cli_menu_antigravity.png)
 
 _Select "antigravity" from the list of supported agents._
 
-![Spec Kit Initialization Success](./media/speckit-specify_init_success_antigravity.png)
+![Spec Kit Initialization Success](./media/specify_init_success_antigravity.png)
 
 _Successful initialization prepares your project with the correct .agent structure._
 
