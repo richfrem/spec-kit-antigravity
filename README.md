@@ -404,6 +404,10 @@ _Select "antigravity" from the list of supported agents._
 
 _Successful initialization prepares your project with the correct .agent structure._
 
+![Antigravity File Structure](./media/antigravity_file_structure.png)
+
+_The resulting folder structure compatible with Antigravity._
+
 You will know that things are configured correctly if you see the `/constitution`, `/specify`, `/plan`, `/tasks`, and `/implement` commands available.
 
 The first step should be establishing your project's governing principles using the `/constitution` command. This helps ensure consistent decision-making throughout all subsequent development phases:
