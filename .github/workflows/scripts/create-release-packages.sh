@@ -34,7 +34,7 @@ rewrite_paths() {
   sed -E \
     -e 's@(/?)memory/@.agent/rules/@g' \
     -e 's@(/?)scripts/@.agent/scripts/@g' \
-    -e 's@(/?)templates/@.agent/workflows/templates/@g'
+    -e 's@(/?)templates/@.agent/templates/@g'
 }
 
 generate_commands() {

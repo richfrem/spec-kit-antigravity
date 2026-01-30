@@ -61,7 +61,7 @@ $SHAI_FILE     = Join-Path $REPO_ROOT 'SHAI.md'
 $Q_FILE        = Join-Path $REPO_ROOT 'AGENTS.md'
 $BOB_FILE      = Join-Path $REPO_ROOT 'AGENTS.md'
 
-$TEMPLATE_FILE = Join-Path $REPO_ROOT '.agent/workflows/templates/agent-file-template.md'
+$TEMPLATE_FILE = Join-Path $REPO_ROOT '.agent/templates/agent-file-template.md'
 
 # Parsed plan data placeholders
 $script:NEW_LANG = ''
@@ -115,7 +115,7 @@ function Validate-Environment {
     }
     if (-not (Test-Path $TEMPLATE_FILE)) {
         Write-Err "Template file not found at $TEMPLATE_FILE"
-        Write-Info 'Run specify init to scaffold .agent/workflows/templates, or add agent-file-template.md there.'
+        Write-Info 'Run specify init to scaffold .agent/templates, or add agent-file-template.md there.'
         exit 1
     }
 }

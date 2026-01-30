@@ -63,7 +63,7 @@ function Rewrite-Paths {
     
     $Content = $Content -replace '(/?)\bmemory/', '.agent/rules/'
     $Content = $Content -replace '(/?)\bscripts/', '.agent/scripts/'
-    $Content = $Content -replace '(/?)\btemplates/', '.agent/workflows/templates/'
+    $Content = $Content -replace '(/?)\btemplates/', '.agent/templates/'
     return $Content
 }
 

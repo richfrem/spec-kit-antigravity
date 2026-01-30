@@ -52,7 +52,7 @@ Running `specify init --here --force` will update:
 
 - ✅ **Slash command files** (`.agent/workflows/`)
 - ✅ **Script files** (`.agent/scripts/`)
-- ✅ **Template files** (`.agent/workflows/templates/`)
+- ✅ **Template files** (`.agent/templates/`)
 - ✅ **Shared rules files** (`.agent/rules/`) - **⚠️ See warnings below**
 
 ### What stays safe?
@@ -126,11 +126,11 @@ git restore .agent/rules/speckit-constitution.md
 
 ### 2. Custom template modifications
 
-If you customized any templates in `.agent/workflows/templates/`, the upgrade will overwrite them. Back them up first:
+If you customized any templates in `.agent/templates/`, the upgrade will overwrite them. Back them up first:
 
 ```bash
 # Back up custom templates
-cp -r .agent/workflows/templates .agent/workflows/templates-backup
+cp -r .agent/templates .agent/templates-backup
 
 # After upgrade, merge your changes back manually
 ```
@@ -179,7 +179,7 @@ git restore .agent/rules/speckit-constitution.md
 ```bash
 # 1. Back up customizations
 cp .agent/rules/speckit-constitution.md /tmp/speckit-constitution-backup.md
-cp -r .agent/workflows/templates /tmp/templates-backup
+cp -r .agent/templates /tmp/templates-backup
 
 # 2. Upgrade CLI
 uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git
@@ -335,7 +335,7 @@ Only Spec Kit infrastructure files:
 
 - Agent command files (`.claude/commands/`, `.github/prompts/`, etc.)
 - Scripts in `.agent/scripts/`
-- Templates in `.agent/workflows/templates/`
+- Templates in `.agent/templates/`
 - Memory files in `.agent/rules/` (including constitution)
 
 **What stays untouched:**

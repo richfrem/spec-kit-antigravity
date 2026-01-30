@@ -7,7 +7,7 @@ import sys
 # Key: Pattern to search for
 # Value: What to check (e.g. "Should not exist", "Should be X")
 CHECKS = {
-    r"\.agent/templates/": "ERROR: Should be .agent/workflows/templates/",
+    r"\.agent/templates/": "ERROR: Should be .agent/templates/",
     r"memory/": "ERROR: Should be rules/ (or .agent/rules/)",
     r"\.agent/memory/": "ERROR: Should be .agent/rules/",
     r"scripts/bash/": "INFO: Verifying script path context...", 

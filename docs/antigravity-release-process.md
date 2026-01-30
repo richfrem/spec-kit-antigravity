@@ -12,7 +12,7 @@ These are the files you edit directly:
 *   **`workflows/`**: Agent behavior definitions (Markdown). Converted from legacy TOML commands.
 *   **`rules/`**: Constitution and agent context templates (Passive Guardrails). Note: Source folder is `memory/`, mapped to `.agent/rules/`.
 *   **`scripts/`**: Bash/PowerShell scripts (e.g., `check-prerequisites.sh`). Kept in root for easy access by manual users.
-*   **`templates/`**: Project file templates (e.g., `spec-template.md`). Mapped to `.agent/workflows/templates/`.
+*   **`templates/`**: Project file templates (e.g., `spec-template.md`). Mapped to `.agent/templates/`.
 
 ### Build Artifacts
 These are generated files:

@@ -16,7 +16,7 @@ Options:
 Source Directories:
     workflows/      -> .agent/workflows/   (Agent behaviors)
     memory/         -> .agent/rules/       (Passive Guardrails)
-    templates/      -> .agent/workflows/templates/   (Project templates, if present)
+    templates/      -> .agent/templates/   (Project templates, if present)
 
 Outputs:
     .agent/         The fully assembled agent configuration folder ready for distribution.
@@ -46,7 +46,7 @@ SOURCES = {
     # Scripts are kept in root scripts/ dir, not copied to .agent
     # "scripts": "scripts",
     # If templates (root) exists, sync it.
-    "templates": "workflows/templates"
+    "templates": "templates"
 }
 
 # --- Logic ---

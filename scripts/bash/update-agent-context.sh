@@ -78,7 +78,7 @@ BOB_FILE="$REPO_ROOT/AGENTS.md"
 ANTIGRAVITY_FILE="$REPO_ROOT/ANTIGRAVITY.md"
 
 # Template file
-TEMPLATE_FILE="$REPO_ROOT/.agent/workflows/templates/agent-file-template.md"
+TEMPLATE_FILE="$REPO_ROOT/.agent/templates/agent-file-template.md"
 
 # Global variables for parsed plan data
 NEW_LANG=""
