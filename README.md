@@ -395,7 +395,13 @@ specify init <project_name> --ai claude --ignore-agent-tools
 
 Go to the project folder and run your AI agent. In our example, we're using `claude`.
 
-![Bootstrapping Claude Code environment](./media/bootstrap-claude-code.gif)
+![Spec Kit CLI Menu with Antigravity Support](./media/specify_cli_menu_antigravity.png)
+
+_Select "antigravity" from the list of supported agents._
+
+![Spec Kit Initialization Success](./media/specify_init_success_antigravity.png)
+
+_Successful initialization prepares your project with the correct .agent structure._
 
 You will know that things are configured correctly if you see the `/speckit.constitution`, `/speckit.specify`, `/speckit.plan`, `/speckit.tasks`, and `/speckit.implement` commands available.
 
@@ -405,7 +411,7 @@ The first step should be establishing your project's governing principles using 
 /speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements. Include governance for how these principles should guide technical decisions and implementation choices.
 ```
 
-This step creates or updates the `.specify/memory/constitution.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
+This step creates or updates the `.agent/rules/constitution.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
 
 ### **STEP 2:** Create project specifications
 
@@ -575,7 +581,7 @@ This helps refine the implementation plan and helps you avoid potential blind sp
 You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
 
 > [!NOTE]
-> Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [constitution](base/memory/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
+> Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [constitution](base/.agent/rules/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
 
 ### **STEP 6:** Generate task breakdown with /speckit.tasks
 
@@ -633,7 +639,7 @@ Once the implementation is complete, test the application and resolve any runtim
  
  - **`workflows/`**: Source of truth for agent workflow definitions (`.md`).
  - **`scripts/`**: Source of truth for bash/powershell scripts used by the agent.
- - **`memory/`**: Source of truth for agent memory templates (Constitution).
+ - **`memory/`**: Source of truth for agent rules/constitution templates (`.md`). Mapped to `.agent/rules/`.
  - **`templates/`**: Source of truth for project file templates.
  - **`.agent/`**: **GENERATED ARTIFACT**. Do not edit directly if you are contributing to the core logic. This folder is built from the sources above.
  

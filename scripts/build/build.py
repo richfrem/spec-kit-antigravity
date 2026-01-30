@@ -15,9 +15,8 @@ Options:
 
 Source Directories:
     workflows/      -> .agent/workflows/   (Agent behaviors)
-    memory/         -> .agent/memory/      (Constitution & Context)
-    scripts/        -> .agent/scripts/     (Bash/PS scripts)
-    templates/      -> .agent/templates/   (Project templates, if present)
+    memory/         -> .agent/rules/       (Passive Guardrails)
+    templates/      -> .agent/workflows/templates/   (Project templates, if present)
 
 Outputs:
     .agent/         The fully assembled agent configuration folder ready for distribution.
@@ -43,11 +42,11 @@ DIST_DIR = ".agent"
 # Source Mapping: (Source Path -> Destination Path relative to DIST_DIR)
 SOURCES = {
     "workflows": "workflows",
-    "memory": "memory",
+    "memory": "rules",
     # Scripts are kept in root scripts/ dir, not copied to .agent
     # "scripts": "scripts",
     # If templates (root) exists, sync it.
-    "templates": "templates"
+    "templates": "workflows/templates"
 }
 
 # --- Logic ---

@@ -55,7 +55,7 @@ def deploy(tag, title, draft=False, prerelease=False, dist_dir=DIST_DIR):
         print(f"  • {os.path.basename(art)}")
 
     # Construct gh command
-    cmd = ["gh", "release", "create", tag, "--title", title]
+    cmd = ["gh", "release", "create", tag, "--title", title, "--generate-notes"]
     if draft:
         cmd.append("--draft")
     if prerelease:

@@ -61,9 +61,9 @@ New-Item -ItemType Directory -Path $GenReleasesDir -Force | Out-Null
 function Rewrite-Paths {
     param([string]$Content)
     
-    $Content = $Content -replace '(/?)\bmemory/', '.specify/memory/'
-    $Content = $Content -replace '(/?)\bscripts/', '.specify/scripts/'
-    $Content = $Content -replace '(/?)\btemplates/', '.specify/templates/'
+    $Content = $Content -replace '(/?)\bmemory/', '.agent/rules/'
+    $Content = $Content -replace '(/?)\bscripts/', '.agent/scripts/'
+    $Content = $Content -replace '(/?)\btemplates/', '.agent/workflows/templates/'
     return $Content
 }
 

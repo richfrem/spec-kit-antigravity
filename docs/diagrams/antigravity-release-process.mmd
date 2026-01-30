@@ -2,7 +2,7 @@ flowchart TB
     subgraph Sources [Source Directories]
         direction LR
         WF[workflows/*.md]
-        MEM[memory/*.md]
+        RULES[memory/*.md]
         TMP[templates/*.md]
         SCR[scripts/*.sh]
     end
@@ -12,7 +12,7 @@ flowchart TB
         AGENT_DIR["/.agent Artifact"]
         
         WF --> BUILD_SCRIPT
-        MEM --> BUILD_SCRIPT
+        RULES --> BUILD_SCRIPT
         TMP --> BUILD_SCRIPT
         
         BUILD_SCRIPT -- Generates --> AGENT_DIR

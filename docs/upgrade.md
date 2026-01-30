@@ -50,10 +50,10 @@ When Spec Kit releases new features (like new slash commands or updated template
 
 Running `specify init --here --force` will update:
 
-- ✅ **Slash command files** (`.claude/commands/`, `.github/prompts/`, etc.)
-- ✅ **Script files** (`.specify/scripts/`)
-- ✅ **Template files** (`.specify/templates/`)
-- ✅ **Shared memory files** (`.specify/memory/`) - **⚠️ See warnings below**
+- ✅ **Slash command files** (`.agent/workflows/`)
+- ✅ **Script files** (`.agent/scripts/`)
+- ✅ **Template files** (`.agent/workflows/templates/`)
+- ✅ **Shared rules files** (`.agent/rules/`) - **⚠️ See warnings below**
 
 ### What stays safe?
 
@@ -102,35 +102,35 @@ With `--force`, it skips the confirmation and proceeds immediately.
 
 ### 1. Constitution file will be overwritten
 
-**Known issue:** `specify init --here --force` currently overwrites `.specify/memory/constitution.md` with the default template, erasing any customizations you made.
+**Known issue:** `specify init --here --force` currently overwrites `.agent/rules/constitution.md` with the default template, erasing any customizations you made.
 
 **Workaround:**
 
 ```bash
 # 1. Back up your constitution before upgrading
-cp .specify/memory/constitution.md .specify/memory/constitution-backup.md
+cp .agent/rules/constitution.md .agent/rules/constitution-backup.md
 
 # 2. Run the upgrade
 specify init --here --force --ai copilot
 
 # 3. Restore your customized constitution
-mv .specify/memory/constitution-backup.md .specify/memory/constitution.md
+mv .agent/rules/constitution-backup.md .agent/rules/constitution.md
 ```
 
 Or use git to restore it:
 
 ```bash
 # After upgrade, restore from git history
-git restore .specify/memory/constitution.md
+git restore .agent/rules/constitution.md
 ```
 
 ### 2. Custom template modifications
 
-If you customized any templates in `.specify/templates/`, the upgrade will overwrite them. Back them up first:
+If you customized any templates in `.agent/workflows/templates/`, the upgrade will overwrite them. Back them up first:
 
 ```bash
 # Back up custom templates
-cp -r .specify/templates .specify/templates-backup
+cp -r .agent/workflows/templates .agent/workflows/templates-backup
 
 # After upgrade, merge your changes back manually
 ```
@@ -171,15 +171,15 @@ uv tool install specify-cli --force --from git+https://github.com/github/spec-ki
 specify init --here --force --ai copilot
 
 # Restore your constitution if customized
-git restore .specify/memory/constitution.md
+git restore .agent/rules/constitution.md
 ```
 
 ### Scenario 2: "I customized templates and constitution"
 
 ```bash
 # 1. Back up customizations
-cp .specify/memory/constitution.md /tmp/constitution-backup.md
-cp -r .specify/templates /tmp/templates-backup
+cp .agent/rules/constitution.md /tmp/constitution-backup.md
+cp -r .agent/workflows/templates /tmp/templates-backup
 
 # 2. Upgrade CLI
 uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git
@@ -188,7 +188,7 @@ uv tool install specify-cli --force --from git+https://github.com/github/spec-ki
 specify init --here --force --ai copilot
 
 # 4. Restore customizations
-mv /tmp/constitution-backup.md .specify/memory/constitution.md
+mv /tmp/constitution-backup.md .agent/rules/constitution.md
 # Manually merge template changes if needed
 ```
 
@@ -215,13 +215,13 @@ If you initialized your project with `--no-git`, you can still upgrade:
 
 ```bash
 # Manually back up files you customized
-cp .specify/memory/constitution.md /tmp/constitution-backup.md
+cp .agent/rules/constitution.md /tmp/constitution-backup.md
 
 # Run upgrade
 specify init --here --force --ai copilot --no-git
 
 # Restore customizations
-mv /tmp/constitution-backup.md .specify/memory/constitution.md
+mv /tmp/constitution-backup.md .agent/rules/constitution.md
 ```
 
 The `--no-git` flag skips git initialization but doesn't affect file updates.
@@ -303,10 +303,10 @@ This tells Spec Kit which feature directory to use when creating specs, plans, a
 
 ```bash
 # If you committed before upgrading
-git restore .specify/memory/constitution.md
+git restore .agent/rules/constitution.md
 
 # If you backed up manually
-cp /tmp/constitution-backup.md .specify/memory/constitution.md
+cp /tmp/constitution-backup.md .agent/rules/constitution.md
 ```
 
 **Prevention:** Always commit or back up `constitution.md` before upgrading.
@@ -334,9 +334,9 @@ This warning appears when you run `specify init --here` (or `specify init .`) in
 Only Spec Kit infrastructure files:
 
 - Agent command files (`.claude/commands/`, `.github/prompts/`, etc.)
-- Scripts in `.specify/scripts/`
-- Templates in `.specify/templates/`
-- Memory files in `.specify/memory/` (including constitution)
+- Scripts in `.agent/scripts/`
+- Templates in `.agent/workflows/templates/`
+- Memory files in `.agent/rules/` (including constitution)
 
 **What stays untouched:**
 
@@ -361,7 +361,7 @@ Only Spec Kit infrastructure files:
 - ✅ **Expected** when adding Spec Kit to an existing codebase
 - ⚠️ **Unexpected** if you thought you were creating a new project in an empty directory
 
-**Prevention tip:** Before upgrading, commit or back up your `.specify/memory/constitution.md` if you customized it.
+**Prevention tip:** Before upgrading, commit or back up your `.agent/rules/constitution.md` if you customized it.
 
 ### "CLI upgrade doesn't seem to work"
 
