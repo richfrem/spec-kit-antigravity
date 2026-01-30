@@ -17,6 +17,9 @@
 
 ---
 
+> [!NOTE]  
+> **Antigravity Fork**: This version of Spec-Kit is customized for native integration with **Antigravity**. It features a specialized build process and flattened asset structure optimized for the Antigravity agent environment.
+
 ## Table of Contents
 
 - [🤔 What is Spec-Driven Development?](#-what-is-spec-driven-development)
@@ -51,7 +54,7 @@ Choose your preferred installation method:
 Install once and use everywhere:
 
 ```bash
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+uv tool install specify-cli --from git+https://github.com/richfrem/spec-kit-antigravity.git
 ```
 
 Then use the tool directly:
@@ -72,7 +75,7 @@ specify check
 To upgrade Specify, see the [Upgrade Guide](./docs/upgrade.md) for detailed instructions. Quick upgrade:
 
 ```bash
-uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git
+uv tool install specify-cli --force --from git+https://github.com/richfrem/spec-kit-antigravity.git
 ```
 
 #### Option 2: One-time Usage
@@ -80,7 +83,7 @@ uv tool install specify-cli --force --from git+https://github.com/github/spec-ki
 Run directly without installing:
 
 ```bash
-uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME>
+uvx --from git+https://github.com/richfrem/spec-kit-antigravity.git specify init <PROJECT_NAME>
 ```
 
 **Benefits of persistent installation:**
@@ -618,7 +621,37 @@ Once the implementation is complete, test the application and resolve any runtim
 
 ---
 
-## 🔍 Troubleshooting
+## 🏗️ Development & Antigravity Architecture
+ 
+ This repository uses a specific source-to-distribution workflow to generate the Antigravity agent configuration.
+ 
+ For a detailed explanation of the build and release process, see [docs/antigravity-release-process.md](./docs/antigravity-release-process.md).
+ 
+ ![Release Diagram](./docs/diagrams/antigravity-release-process.png)
+ 
+ ### Repository Structure
+ 
+ - **`workflows/`**: Source of truth for agent workflow definitions (`.md`).
+ - **`scripts/`**: Source of truth for bash/powershell scripts used by the agent.
+ - **`memory/`**: Source of truth for agent memory templates (Constitution).
+ - **`templates/`**: Source of truth for project file templates.
+ - **`.agent/`**: **GENERATED ARTIFACT**. Do not edit directly if you are contributing to the core logic. This folder is built from the sources above.
+ 
+ ### Build Process
+ 
+ To rebuild the `.agent` folder after editing sources:
+ 
+ ```bash
+ python3 scripts/build/build.py --clean
+ ```
+ 
+ To create the release ZIP files (for CLI distribution or manual installation):
+ 
+ ```bash
+ python3 scripts/build/package_release.py
+ ```
+ 
+ ## 🔍 Troubleshooting
 
 ### Git Credential Manager on Linux
 

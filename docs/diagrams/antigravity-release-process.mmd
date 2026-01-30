@@ -1,0 +1,42 @@
+flowchart TB
+    subgraph Sources [Source Directories]
+        direction LR
+        WF[workflows/*.md]
+        MEM[memory/*.md]
+        TMP[templates/*.md]
+        SCR[scripts/*.sh]
+    end
+
+    subgraph Build [Stage 1: Build]
+        BUILD_SCRIPT[scripts/build/build.py]
+        AGENT_DIR["/.agent Artifact"]
+        
+        WF --> BUILD_SCRIPT
+        MEM --> BUILD_SCRIPT
+        TMP --> BUILD_SCRIPT
+        
+        BUILD_SCRIPT -- Generates --> AGENT_DIR
+    end
+
+    subgraph Package [Stage 2: Package]
+        PKG_SCRIPT[scripts/build/package_release.py]
+        STAGING[Staging Area]
+        ZIP_SH[spec-kit-antigravity-sh.zip]
+        
+        AGENT_DIR --> PKG_SCRIPT
+        SCR --> PKG_SCRIPT
+        
+        PKG_SCRIPT -- Copies --> STAGING
+        STAGING -- Zips into --> ZIP_SH
+    end
+
+    subgraph Deploy [Stage 3: Deploy]
+        DEP_SCRIPT[scripts/build/deploy_release.py]
+        GH_REL[GitHub Release]
+        
+        ZIP_SH --> DEP_SCRIPT
+        DEP_SCRIPT -- Uploads to --> GH_REL
+    end
+
+    style AGENT_DIR fill:#ff9,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style ZIP_SH fill:#9f9,stroke:#333,stroke-width:2px
