@@ -417,22 +417,27 @@ The produced specification should contain a set of user stories and functional r
 At this stage, your project folder contents should resemble the following:
 
 ```text
-└── .specify
-    ├── memory
+└── .agent
+    ├── rules
     │  └── constitution.md
-    ├── scripts
-    │  ├── check-prerequisites.sh
-    │  ├── common.sh
-    │  ├── create-new-feature.sh
-    │  ├── setup-plan.sh
-    │  └── update-claude-md.sh
-    ├── specs
-    │  └── 001-create-taskify
-    │      └── spec.md
-    └── templates
-        ├── plan-template.md
-        ├── spec-template.md
-        └── tasks-template.md
+    └── workflows
+        ├── templates
+        │   ├── plan-template.md
+        │   ├── spec-template.md
+        │   └── tasks-template.md
+        ├── specify.md
+        ├── plan.md
+        └── ...
+├── scripts
+│  ├── bash
+│  │  ├── create-new-feature.sh
+│  │  └── ...
+│  └── powershell
+│     ├── create-new-feature.ps1
+│     └── ...
+└── specs
+    └── 001-create-taskify
+        └── spec.md
 ```
 
 ### **STEP 3:** Functional specification clarification (required before planning)
@@ -456,13 +461,13 @@ tasks for each one randomly distributed into different states of completion. Mak
 one task in each stage of completion.
 ```
 
-You should also ask Claude Code to validate the **Review & Acceptance Checklist**, checking off the things that are validated/pass the requirements, and leave the ones that are not unchecked. The following prompt can be used:
+You should also ask your agent to validate the **Review & Acceptance Checklist**, checking off the things that are validated/pass the requirements, and leave the ones that are not unchecked. The following prompt can be used:
 
 ```text
 Read the review and acceptance checklist, and check off each item in the checklist if the feature spec meets the criteria. Leave it empty if it does not.
 ```
 
-It's important to use the interaction with Claude Code as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
+It's important to use the interaction with your agent as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
 
 ### **STEP 4:** Generate a plan
 
@@ -478,35 +483,32 @@ The output of this step will include a number of implementation detail documents
 
 ```text
 .
-├── CLAUDE.md
-├── memory
-│  └── constitution.md
+├── .agent
+│  ├── rules
+│  │  └── constitution.md
+│  └── workflows
+│       └── ...
 ├── scripts
-│  ├── check-prerequisites.sh
-│  ├── common.sh
-│  ├── create-new-feature.sh
-│  ├── setup-plan.sh
-│  └── update-claude-md.sh
-├── specs
-│  └── 001-create-taskify
-│      ├── contracts
-│      │  ├── api-spec.json
-│      │  └── signalr-spec.md
-│      ├── data-model.md
-│      ├── plan.md
-│      ├── quickstart.md
-│      ├── research.md
-│      └── spec.md
-└── templates
-    ├── CLAUDE-template.md
-    ├── plan-template.md
-    ├── spec-template.md
-    └── tasks-template.md
+│  ├── bash
+│  │  ├── setup-plan.sh
+│  │  └── ...
+│  └── powershell
+│     ├── setup-plan.ps1
+│     └── ...
+└── specs
+   └── 001-create-taskify
+       ├── contracts
+       │  ├── api-spec.json
+       │  └── signalr-spec.md
+       ├── data-model.md
+       ├── plan.md
+       ├── research.md
+       └── spec.md
 ```
 
-Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask Claude Code to refine it if any of the components stand out, or even have it check the locally-installed version of the platform/framework you want to use (e.g., .NET).
+Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask your agent to refine it if any of the components stand out, or even have it check the locally-installed version of the platform/framework you want to use (e.g., .NET).
 
-Additionally, you might want to ask Claude Code to research details about the chosen tech stack if it's something that is rapidly changing (e.g., .NET Aspire, JS frameworks), with a prompt like this:
+Additionally, you might want to ask your agent to research details about the chosen tech stack if it's something that is rapidly changing (e.g., .NET Aspire, JS frameworks), with a prompt like this:
 
 ```text
 I want you to go through the implementation plan and implementation details, looking for areas that could
@@ -516,7 +518,7 @@ versions that we are going to be using in this Taskify application and spawn par
 any details using research from the web.
 ```
 
-During this process, you might find that Claude Code gets stuck researching the wrong thing - you can help nudge it in the right direction with a prompt like this:
+During this process, you might find that the agent gets stuck researching the wrong thing - you can help nudge it in the right direction with a prompt like this:
 
 ```text
 I think we need to break this down into a series of steps. First, identify a list of tasks
@@ -529,11 +531,11 @@ That's way too untargeted research. The research needs to help you solve a speci
 ```
 
 > [!NOTE]
-> Claude Code might be over-eager and add components that you did not ask for. Ask it to clarify the rationale and the source of the change.
+> The agent might be over-eager and add components that you did not ask for. Ask it to clarify the rationale and the source of the change.
 
-### **STEP 5:** Have Claude Code validate the plan
+### **STEP 5:** Have your agent validate the plan
 
-With the plan in place, you should have Claude Code run through it to make sure that there are no missing pieces. You can use a prompt like this:
+With the plan in place, you should have your agent run through it to make sure that there are no missing pieces. You can use a prompt like this:
 
 ```text
 Now I want you to go and audit the implementation plan and the implementation detail files.
@@ -543,12 +545,12 @@ when I look at the core implementation, it would be useful to reference the appr
 details where it can find the information as it walks through each step in the core implementation or in the refinement.
 ```
 
-This helps refine the implementation plan and helps you avoid potential blind spots that Claude Code missed in its planning cycle. Once the initial refinement pass is complete, ask Claude Code to go through the checklist once more before you can get to the implementation.
+This helps refine the implementation plan and helps you avoid potential blind spots that the agent missed in its planning cycle. Once the initial refinement pass is complete, ask your agent to go through the checklist once more before you can get to the implementation.
 
-You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
+You can also ask your agent (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
 
 > [!NOTE]
-> Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the [constitution](base/.agent/rules/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
+> Before you have the agent implement it, it's also worth prompting the agent to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask your agent to resolve them. Ensure that the agent follows the [constitution](base/.agent/rules/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
 
 ### **STEP 6:** Generate task breakdown with /tasks
 
@@ -567,17 +569,17 @@ This step creates a `tasks.md` file in your feature specification directory that
 - **Test-driven development structure** - If tests are requested, test tasks are included and ordered to be written before implementation
 - **Checkpoint validation** - Each user story phase includes checkpoints to validate independent functionality
 
-The generated tasks.md provides a clear roadmap for the `/speckit.implement` command, ensuring systematic implementation that maintains code quality and allows for incremental delivery of user stories.
+The generated tasks.md provides a clear roadmap for the `/implement` command, ensuring systematic implementation that maintains code quality and allows for incremental delivery of user stories.
 
 ### **STEP 7:** Implementation
 
-Once ready, use the `/speckit.implement` command to execute your implementation plan:
+Once ready, use the `/implement` command to execute your implementation plan:
 
 ```text
-/speckit.implement
+/implement
 ```
 
-The `/speckit.implement` command will:
+The `/implement` command will:
 
 - Validate that all prerequisites are in place (constitution, spec, plan, and tasks)
 - Parse the task breakdown from `tasks.md`
