@@ -419,11 +419,11 @@ At this stage, your project folder contents should resemble the following:
 └── .agent
     ├── rules
     │  └── constitution.md
+    ├── templates
+    │   ├── plan-template.md
+    │   ├── spec-template.md
+    │   └── tasks-template.md
     └── workflows
-        ├── templates
-        │   ├── plan-template.md
-        │   ├── spec-template.md
-        │   └── tasks-template.md
         ├── speckit-specify.md
         ├── speckit-plan.md
         └── ...
