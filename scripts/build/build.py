@@ -98,6 +98,11 @@ def sanitize_content():
     """
     print("Sanitizing content...")
     
+    base_cmds = [
+        "analyze", "specify", "plan", "tasks", "implement", "constitution", 
+        "clarify", "checklist", "tasks-to-issues"
+    ]
+    
     all_files = glob.glob(os.path.join(DIST_DIR, "**", "*"), recursive=True)
     count = 0
     
@@ -111,40 +116,18 @@ def sanitize_content():
             
             original_content = content
             
-            # --- Transformations ---
-            
             # 1. Path Normalization
-            # Ensure any references to .specify or .gemini refer to .agent
             content = content.replace(".specify/", ".agent/")
             content = content.replace(".gemini/", ".agent/")
             
             # 2. Workflow / Command Normalization
-            # Ensure we use standard names (e.g. /plan instead of /speckit.plan)
-            # This handles cases where source templates might still have legacy refs
-            legacy_cmds = [
-                ("speckit-analyze", "analyze"),
-                ("speckit-specify", "specify"),
-                ("speckit-plan", "plan"),
-                ("speckit-tasks", "tasks"),
-                ("speckit-implement", "implement"),
-                ("speckit-constitution", "constitution"),
-                ("speckit-clarify", "clarify"),
-                ("speckit-checklist", "checklist"),
-                ("speckit-taskstoissues", "tasks-to-issues")
-            ]
-            
-            for old, new in legacy_cmds:
-                # Replace slash commands
-                content = re.sub(f"/speckit\.{new}", f"/{new}", content)
-                content = re.sub(f"/{old}", f"/{new}", content)
+            for cmd in base_cmds:
+                # Enforce /speckit-cmd
+                content = re.sub(f"/(?!speckit-){cmd}", f"/speckit-{cmd}", content)
+                content = re.sub(f"/speckit\.{cmd}", f"/speckit-{cmd}", content)
                 
-                # Replace file references
-                content = content.replace(f"{old}.md", f"{new}.md")
-                
-            # 3. Agent Folder Structure checks
-            # (Adding .agent/ prefix if missing for known internal paths?)
-            # content = content.replace("workflows/", ".agent/workflows/") 
-            # ^ Too risky to do globally without context match.
+                # Enforce speckit-cmd.md references (matches word boundary start to avoid partial replace)
+                content = re.sub(rf"(?<!speckit-)\b{cmd}\.md", f"speckit-{cmd}.md", content)
             
             if content != original_content:
                 with open(filepath, 'w', encoding='utf-8') as f:
@@ -157,6 +140,30 @@ def sanitize_content():
             
     print(f"  • Updated content in {count} files.")
 
+def rename_workflows():
+    """
+    Renames workflow files to include 'speckit-' prefix.
+    """
+    print("Renaming workflow files...")
+    workflows_dir = os.path.join(DIST_DIR, "workflows")
+    if not os.path.exists(workflows_dir): return
+    
+    base_cmds = [
+        "analyze", "specify", "plan", "tasks", "implement", "constitution", 
+        "clarify", "checklist", "tasks-to-issues"
+    ]
+    
+    count = 0
+    for fname in os.listdir(workflows_dir):
+        if fname.endswith(".md") and not fname.startswith("speckit-"):
+            name_root = fname.replace(".md", "")
+            if name_root in base_cmds:
+                old_p = os.path.join(workflows_dir, fname)
+                new_p = os.path.join(workflows_dir, f"speckit-{fname}")
+                os.rename(old_p, new_p)
+                count += 1
+    print(f"  • Renamed {count} workflows.")
+
 def main():
     parser = argparse.ArgumentParser(description="Antigravity Agent Builder")
     parser.add_argument("--clean", action="store_true", help="Remove existing .agent folder first")
@@ -167,6 +174,7 @@ def main():
     
     ensure_dirs()
     copy_sources()
+    rename_workflows()
     sanitize_content()
     
     print(f"\n✅ Build Complete. Distribution is ready in '{DIST_DIR}/'")
