@@ -33,6 +33,7 @@
 - [🔧 Prerequisites](#-prerequisites)
 - [📖 Learn More](#-learn-more)
 - [📋 Detailed Process](#-detailed-process)
+- [🏗️ Development & Antigravity Architecture](#%EF%B8%8F-development--antigravity-architecture)
 - [🔍 Troubleshooting](#-troubleshooting)
 - [👥 Maintainers](#-maintainers)
 - [💬 Support](#-support)
