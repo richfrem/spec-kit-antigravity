@@ -226,6 +226,12 @@ AGENT_CONFIG = {
         "install_url": None,  # IDE-based
         "requires_cli": False,
     },
+    "antigravity": {
+        "name": "Antigravity",
+        "folder": ".agent/",
+        "install_url": None,  # Native integration
+        "requires_cli": False,
+    },
 }
 
 SCRIPT_TYPE_CHOICES = {"sh": "POSIX Shell (bash/zsh)", "ps": "PowerShell"}
