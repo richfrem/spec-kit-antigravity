@@ -344,57 +344,19 @@ If you encounter issues with an agent, please open an issue so we can refine the
 <details>
 <summary>Click to expand the detailed step-by-step walkthrough</summary>
 
-You can use the Specify CLI to bootstrap your project, which will bring in the required artifacts in your environment. Run:
+The following guide walks through the complete end-to-end flow using the Antigravity agent.
+
+### **STEP 0:** Initialize the project
+
+First, create a new project using the Specify CLI with the Antigravity agent:
 
 ```bash
-specify init <project_name>
-```
-
-Or initialize in the current directory:
-
-```bash
-specify init .
-# or use the --here flag
-specify init --here
-# Skip confirmation when the directory already has files
-specify init . --force
-# or
-specify init --here --force
-```
-
-![Specify CLI bootstrapping a new project in the terminal](./media/specify_cli.gif)
-
-You will be prompted to select the AI agent you are using. You can also proactively specify it directly in the terminal:
-
-```bash
-specify init <project_name> --ai claude
-specify init <project_name> --ai gemini
-specify init <project_name> --ai copilot
-
-# Or in current directory:
-specify init . --ai claude
-specify init . --ai codex
-
-# or use --here flag
-specify init --here --ai claude
-specify init --here --ai codex
-
-# Force merge into a non-empty current directory
-specify init . --force --ai claude
-
-# or
-specify init --here --force --ai claude
-```
-
-The CLI will check if you have Claude Code, Gemini CLI, Cursor CLI, Qwen CLI, opencode, Codex CLI, Qoder CLI, or Amazon Q Developer CLI installed. If you do not, or you prefer to get the templates without checking for the right tools, use `--ignore-agent-tools` with your command:
-
-```bash
-specify init <project_name> --ai claude --ignore-agent-tools
+specify init <project_name> --ai antigravity
 ```
 
 ### **STEP 1:** Establish project principles
 
-Go to the project folder and run your AI agent. In our example, we're using `claude`.
+Go to the project folder and run your AI agent.
 
 ![Spec Kit CLI Menu with Antigravity Support](./media/specify_cli_menu_antigravity.png)
 
