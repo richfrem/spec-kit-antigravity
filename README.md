@@ -341,8 +341,7 @@ If you encounter issues with an agent, please open an issue so we can refine the
 
 ## 📋 Detailed Process
 
-<details>
-<summary>Click to expand the detailed step-by-step walkthrough</summary>
+
 
 The following guide walks through the complete end-to-end flow using the Antigravity agent.
 
@@ -592,7 +591,7 @@ The `/implement` command will:
 
 Once the implementation is complete, test the application and resolve any runtime errors that may not be visible in CLI logs (e.g., browser console errors). You can copy and paste such errors back to your AI agent for resolution.
 
-</details>
+
 
 ---
 
