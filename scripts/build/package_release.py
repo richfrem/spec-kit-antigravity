@@ -77,9 +77,9 @@ def package_release(skip_build=False, output_dir="dist_output"):
     shutil.copytree("scripts", os.path.join(staging_dir, "scripts"), 
                     ignore=shutil.ignore_patterns('build', 'dev', '__pycache__', '*.py'))
 
-    # 3c. Copy README.md (Root) -> staging/README.md
-    print(f"  • Staging README.md -> {staging_dir}/README.md")
-    shutil.copy2("README.md", os.path.join(staging_dir, "README.md"))
+    # 3c. Copy README.md (Root) -> staging/README_SPECKIT.md
+    print(f"  • Staging README.md -> {staging_dir}/README_SPECKIT.md")
+    shutil.copy2("README.md", os.path.join(staging_dir, "README_SPECKIT.md"))
 
     # 4. Create README marker (Anti-flattening hack for CLI)
     with open(os.path.join(staging_dir, "README_antigravity.txt"), "w") as f:
