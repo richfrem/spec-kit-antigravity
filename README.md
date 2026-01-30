@@ -65,9 +65,9 @@ Then use the tool directly:
 specify init <PROJECT_NAME>
 
 # Or initialize in existing project
-specify init . --ai claude
+specify init . --ai antigravity
 # or
-specify init --here --ai claude
+specify init --here --ai antigravity
 
 # Check installed tools
 specify check
@@ -96,7 +96,7 @@ uvx --from git+https://github.com/richfrem/spec-kit-antigravity.git specify init
 
 ### 2. Establish project principles
 
-Launch your AI assistant in the project directory. The `/speckit.*` commands are available in the assistant.
+Launch your AI assistant in the project directory. The slash commands are available in the assistant.
 
 Use the **`/constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
@@ -186,7 +186,7 @@ The `specify` command supports the following options:
 | `<project-name>`       | Argument | Name for your new project directory (optional if using `--here`, or use `.` for current directory)                                                                                           |
 | `--ai`                 | Option   | AI assistant to use: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, `shai`, `q`, `bob`, `qoder`, or `antigravity` |
 | `--script`             | Option   | Script variant to use: `sh` (bash/zsh) or `ps` (PowerShell)                                                                                                                                  |
-| `--ignore-agent-tools` | Flag     | Skip checks for AI agent tools like Claude Code                                                                                                                                              |
+| `--ignore-agent-tools` | Flag     | Skip checks for AI agent tools                                                                                                                                              |
 | `--no-git`             | Flag     | Skip git repository initialization                                                                                                                                                           |
 | `--here`               | Flag     | Initialize project in the current directory instead of creating a new one                                                                                                                    |
 | `--force`              | Flag     | Force merge/overwrite when initializing in current directory (skip confirmation)                                                                                                             |
@@ -201,7 +201,7 @@ The `specify` command supports the following options:
 specify init my-project
 
 # Initialize with specific AI assistant
-specify init my-project --ai claude
+specify init my-project --ai antigravity
 
 # Initialize with Cursor support
 specify init my-project --ai cursor-agent
@@ -238,10 +238,10 @@ specify init --here --force --ai copilot
 specify init my-project --ai gemini --no-git
 
 # Enable debug output for troubleshooting
-specify init my-project --ai claude --debug
+specify init my-project --ai antigravity --debug
 
 # Use GitHub token for API requests (helpful for corporate environments)
-specify init my-project --ai claude --github-token ghp_your_token_here
+specify init my-project --ai antigravity --github-token ghp_your_token_here
 
 # Check system requirements
 specify check
