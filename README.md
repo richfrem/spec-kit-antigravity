@@ -22,21 +22,33 @@
 
 ## 🚀 Antigravity Quick Start
 
-If you're using this repo with **Antigravity IDE**, follow these steps after cloning:
+### Option A: Initialize a New Project (Recommended)
 
-### Step 1: Run the Sync Scripts
+If you're starting a **new project**, use the Specify CLI:
 
 ```bash
-# Navigate to your project
-cd your-project
+# Install the CLI (one-time)
+uv tool install specify-cli --from git+https://github.com/richfrem/spec-kit-antigravity.git
 
+# Initialize a new project with Antigravity
+specify init my-project --ai antigravity
+
+# Or initialize in an existing directory
+specify init . --ai antigravity
+```
+
+After initialization, **restart Antigravity IDE** and your slash commands will be ready.
+
+### Option B: Clone This Repo Directly
+
+If you're cloning this repo to use or contribute, run the sync scripts:
+
+```bash
 # Run all sync scripts
 python3 tools/bridge/speckit_system_bridge.py
 python3 tools/bridge/sync_rules.py --all
 python3 tools/bridge/sync_skills.py --all
 ```
-
-### Step 2: Restart the IDE
 
 > [!IMPORTANT]
 > You must **restart Antigravity IDE** after running the sync scripts for slash commands to appear.
