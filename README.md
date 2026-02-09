@@ -20,8 +20,80 @@
 > [!NOTE]  
 > **Antigravity Fork**: This version of Spec-Kit is customized for native integration with **Antigravity**. It features a specialized build process and flattened asset structure optimized for the Antigravity agent environment.
 
+## 🚀 Antigravity Quick Start
+
+If you're using this repo with **Antigravity IDE**, follow these steps after cloning:
+
+### Step 1: Run the Sync Scripts
+
+```bash
+# Navigate to your project
+cd your-project
+
+# Run all sync scripts
+python3 tools/bridge/speckit_system_bridge.py
+python3 tools/bridge/sync_rules.py --all
+python3 tools/bridge/sync_skills.py --all
+```
+
+### Step 2: Restart the IDE
+
+> [!IMPORTANT]
+> You must **restart Antigravity IDE** after running the sync scripts for slash commands to appear.
+
+### Step 3: Create Your Constitution (Optional)
+
+After restart, use the `/spec-kitty.constitution` workflow to establish your project's technical standards:
+
+```
+/spec-kitty.constitution
+```
+
+Then re-sync to propagate the constitution to all agents:
+
+```bash
+python3 tools/bridge/speckit_system_bridge.py
+```
+
+### Step 4: Start Building
+
+You now have access to all spec-kitty slash commands:
+- `/spec-kitty.specify` — Define what you want to build
+- `/spec-kitty.plan` — Create technical implementation plan
+- `/spec-kitty.tasks` — Generate work packages
+- `/spec-kitty.implement` — Execute implementation
+
+### 📖 Additional Documentation
+
+| Resource | Description |
+|----------|-------------|
+| [Bridge System](./tools/bridge/README.md) | How the multi-agent sync system works |
+| [Agent Worktree Reference](./tools/bridge/agent-worktree-reference.md) | Cheat sheet for Git worktree operations |
+| [Standard Workflow Guide](./tools/bridge/standard-spec-kitty-workflow.md) | Branch protection and merge workflows |
+| [Architecture Overview](./tools/bridge/bridge_architecture_overview.md) | Conceptual model of the bridge system |
+
+---
+
+## 🤖 AI Agent Workflow Enhancements
+
+This fork includes **enhanced documentation specifically designed for AI agents** working with Git worktrees and the spec-kitty workflow.
+
+### What This Fork Improves
+
+- **Clear Naming Conventions**: Standardized patterns for worktree directories (`<feature-num>-<slug>-<WP>`) and branch names
+- **"What NEVER to Do" Tables**: Explicit guidance preventing common agent mistakes like committing to main or pushing to protected branches
+- **Branch Protection Workflow**: Step-by-step process for feature branch → PR → merge when `origin/main` has protection
+- **Manual Merge Fallback**: Recovery instructions when automated `spec-kitty merge` fails
+- **Backup-to-Origin Step**: Recommended `git push origin <branch>` before review to safely back up work
+
+**Supported Agents**: Antigravity (`.agent/`), Claude (`.claude/`), Gemini (`.gemini/`), GitHub Copilot (`.github/`)
+
+---
+
 ## Table of Contents
 
+- [🚀 Antigravity Quick Start](#-antigravity-quick-start)
+- [🤖 AI Agent Workflow Enhancements](#-ai-agent-workflow-enhancements)
 - [🤔 What is Spec-Driven Development?](#-what-is-spec-driven-development)
 - [⚡ Get Started](#-get-started)
 - [📽️ Video Overview](#️-video-overview)
